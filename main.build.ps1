@@ -1,6 +1,6 @@
 
 task Build {
-  XmlDoc2CmdletDoc.0.2.9\tools\XmlDoc2CmdletDoc.exe csproj\bin\Release\HorkerTemplateEngine.dll
+  lib\XmlDoc2CmdletDoc.0.2.9\tools\XmlDoc2CmdletDoc.exe csproj\bin\Release\HorkerTemplateEngine.dll
 
   $null = mkdir "$PSScriptRoot\HorkerTemplateEngine\" -Force
 

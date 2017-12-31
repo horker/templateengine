@@ -137,6 +137,7 @@ namespace Horker.TemplateEngine
                                             // It doesn't show the following newlines.
                                             // To keep the line numbers of the template correct,
                                             // newlines are output as part of the processing script.
+                                            // These should be done before OpenLiteral().
                                             if (Peek() == '\n') {
                                                 ch = GetNextChar();
                                                 Append(ch);

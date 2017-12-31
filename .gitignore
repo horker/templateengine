@@ -12,7 +12,8 @@ Release/
 *.dll
 *.dll-Help.xml
 
-XmlDoc2CmdletDoc.0.2.9/
+lib/
 HorkerTemplateEngine/
 
 temp.*
+*.tmp

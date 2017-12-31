@@ -30,7 +30,9 @@ CompanyName = ''
 Copyright = '(c) 2017 horker. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = "The Horker Template Engine is a template engine for plain text empowered by PowerShell. It offers similar syntax to the classical ASP/JSP/ePerl/erb template engines. For more details, see https://github.com/horkerps/templateengine"
+Description = "The Horker Template Engine is a text preprocessor empowered by PowerShell. It offers similar syntax to the classical ASP/JSP/ePerl/erb template engines.
+
+For more details, see https://github.com/horkerps/templateengine"
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -95,7 +97,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('template', 'engine', 'asp', 'jsp', 'eperl', 'erb', 'twig', 'automation', 'plain', 'text', 'preprocessing', 'generator', 'boilerplate')
+        Tags = @('template', 'engine', 'asp', 'jsp', 'eperl', 'erb', 'twig', 'automation', 'plain', 'text', 'preprocessor', 'preprocessing', 'generator', 'boilerplate')
 
         # A URL to the license for this module.
         LicenseUri = 'https://opensource.org/licenses/MIT'
