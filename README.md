@@ -57,26 +57,24 @@ This is a mail for you.
 In practice, you may want to generate multiple documents at once.  It can be done by an ordinary PowerShell script as follows.
 
 ```PowerShell
-PS>Get-Content customers_list.txt
-Bill
-Jane
-Steve
-PS>$customers = Get-Content customers_list.txt
-PS>$customers | foreach {
->>>  $customer = $_
->>>  Get-Content $template Invoke-TemplateEngine |
->>>    Set-Content "mail_to_$customer.txt"
->>>}
->>>
+$customers = "Bill", "Jane", "Steve"
+
+$template = Get-Content template.txt
+
+$customers | foreach {
+  $customer = $_
+  Invoke-TemplateEngine $template |
+    Set-Content "mail_to_$customer.txt"
+}
 ```
 
-It generates three files, in which each customer name is embeded.
+This script generates three files, in which each customer name is embeded.
 
 ### Output formatting
 
 Let us see the following examples to understand how objects will be written into the output and how you can control it.
 
-As an example data, we will use the objects returned by `dir`, as follows.
+As an example data, we will use the following objects returned by the `dir` (`Get-ChildItem`) cmdlet:
 
 ```PowerShell
 PS>dir
@@ -90,14 +88,14 @@ Mode          LastWriteTime Length Name
 -a---- 2017/12/29     17:36    252 c.txt
 ```
 
-First, a simple `dir` in a template yields the following result:
+First, a simple `dir` call in a template yields the following result:
 
 ```PowerShell
 PS>Invoke-TemplateEngine '<% dir %>'
 a.textb.txtc.txt
 ```
 
-This is because each FileInfo object is converted into a string by the ToString() method (which produces `a.txt` and so on), and no formatting is done including insertion of whitespaces.
+This is because each FileInfo object is converted into a string by the ToString() method (which produces `a.txt` and so on), and no formatting is done including insertion of newlines or spaces.
 
 If you want to format an output, put code explicitly to do so:
 
@@ -113,7 +111,7 @@ Or, you can use loop as follows:
 ```PowerShell
 PS>Invoke-TemplateEngine '
 >>><% dir | foreach { -%>
->>><% $_.Name %>(size: <% $_.Length %>) %>
+>>><%   $_.Name %>(size: <% $_.Length %>)
 >>><% } -%>'
 >>>
 a.txt (size: 252)
@@ -151,4 +149,4 @@ On runtime there is no dependency.
 
 ## License
 
-The MIT License.  See LICENSE.txt for details.
+The MIT License.
