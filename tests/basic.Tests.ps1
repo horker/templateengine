@@ -110,6 +110,18 @@ Describe "Invoke-TemplateEngine" {
     $result | Should -Be "999`r`n"
   }
 
+  It "accepts a template from a pipeline including empty strings" {
+    $template = @"
+a
+
+b
+
+c
+"@
+    $result = $template | Invoke-TemplateEngine
+    $result | Should -Be ($template + "`r`n") # PowerShell heredoc can't end with newline
+  }
+
 #  It "reports an error with the source line number" {
 #    $result = "10`r`n20`r`n<% xxx %>`r`n<% yyy %>" | Invoke-TemplateEngine 2>&1
 #  }

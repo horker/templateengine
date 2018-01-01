@@ -294,6 +294,7 @@ namespace Horker.TemplateEngine
         /// <para type="description">A document template, given as a string or an array of strings through pipeline.</para>
         /// </summary>
         [Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        [AllowEmptyString()]
         public string Template { get; set; }
 
         /// <summary>

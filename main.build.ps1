@@ -19,7 +19,7 @@ task Install {
   Get-Item "$PSScriptRoot\HorkerTemplateEngine\*" | foreach {
     $_.FullName
     try {
-      Copy-Item $_.FullName "$HOME\Documents\WindowsPowerShell\Modules\HorkerTemplateEngine"
+      Copy-Item $_.FullName "$HOME\Documents\WindowsPowerShell\Modules\HorkerTemplateEngine\0.1.0"
     }
     catch {
       Write-Error $_ -EA Continue
