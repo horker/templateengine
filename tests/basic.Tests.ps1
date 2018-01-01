@@ -94,6 +94,12 @@ Describe "script generator" {
     $result = Invoke-Generator -Join "<%1%><%2%><%3-%><%4%>"
     $result | Should -Be "1234"
   }
+
+  It "can invoke a function defined in the current session" {
+    function f () { "1234"; "abc" }
+    $result = Invoke-Generator -Join "<% f %>"
+    $result | Should -Be "1234abc"
+  }
 }
 
 Describe "Invoke-TemplateEngine" {

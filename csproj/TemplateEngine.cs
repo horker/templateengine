@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 
 namespace Horker.TemplateEngine
 {
@@ -335,12 +336,10 @@ namespace Horker.TemplateEngine
             }
 
             _buffer.Clear();
-            using (var invoker = new RunspaceInvoke()) {
-                IList errors;
-                var results = invoker.Invoke(script, new object[0], out errors);
-                foreach (var obj in results) {
-                    _buffer.Append(obj.ToString());
-                }
+
+            var results = InvokeCommand.InvokeScript(script, true, PipelineResultTypes.None, null, null);
+            foreach (var obj in results) {
+                _buffer.Append(obj.ToString());
             }
 
             WriteObject(_buffer.ToString());
