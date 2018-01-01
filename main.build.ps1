@@ -1,3 +1,4 @@
+Set-StrictMode -Version 3
 
 task Build {
   lib\XmlDoc2CmdletDoc.0.2.9\tools\XmlDoc2CmdletDoc.exe csproj\bin\Release\HorkerTemplateEngine.dll
@@ -15,11 +16,17 @@ task Test {
 }
 
 task Install {
-  $null = mkdir "$HOME\Documents\WindowsPowerShell\Modules\HorkerTemplateEngine" -Force
+  $psd = Invoke-Expression ((Get-Content "$PSScriptRoot\scripts\HorkerTemplateEngine.psd1") -join "`r`n")
+  $version = $psd.ModuleVersion
+  $installPath = "$HOME\Documents\WindowsPowerShell\Modules\HorkerTemplateEngine\$version"
+
+  $null = mkdir $installPath -Force
+  Write-Host "INSTALL PATH: $installPath"
+
   Get-Item "$PSScriptRoot\HorkerTemplateEngine\*" | foreach {
-    $_.FullName
+    Write-Host "FILE: $_.FullName"
     try {
-      Copy-Item $_.FullName "$HOME\Documents\WindowsPowerShell\Modules\HorkerTemplateEngine\0.1.0"
+      Copy-Item $_.FullName $installPath
     }
     catch {
       Write-Error $_ -EA Continue
