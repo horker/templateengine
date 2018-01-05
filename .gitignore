@@ -17,3 +17,6 @@ HorkerTemplateEngine/
 
 temp.*
 *.tmp
+
+# Don't add to the repos becuase the Nuget API key is written in this
+Publish.ps1
