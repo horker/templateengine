@@ -10,7 +10,7 @@ The Horker Template Engine is available in the [PowerShell Gallery](https://www.
 Install-Module HorkerTemplateEngine
 ```
 
-## Cmdlet synopsis
+## Cmdlet Synopsis
 
 The Horker Template Engine exports a single cmdlet, `Invoke-TemplateEngine`.  It processes a document template that embeds PowerShell code and generates a plain text as an outcome to the standard output stream.
 
@@ -18,7 +18,7 @@ The Horker Template Engine exports a single cmdlet, `Invoke-TemplateEngine`.  It
 Invoke-TemplateEngine [-Template] <string> [[-ProcessorFile] <string>] [<CommonParameters>]
 ```
 
-- `-Template` A document template, given as a string or an array of strings through pipeline.  When given through pipeline, they are joined with newlines.
+- `-Template` A document template, given as a string.  If you want to provide a template from a file, use `Get-Content` and give it through pipeline.
 - `-ProcessorFile` generates a internal processing script for debugging.
 
 ## Template Syntax
@@ -27,13 +27,15 @@ Invoke-TemplateEngine [-Template] <string> [[-ProcessorFile] <string>] [<CommonP
 - Text portions enclosed with `<%` and `-%>` are processed as the same above, but the following newline will not appear in the output.
 - The other text is written into the resultant document without any changes.
 
-Note that, unlike usual PowerShell output, objects are converted into strings by the ToString() method and no newlines are inserted between them. See Example section for details.
+On code execution, the variables and the functions in the current session are available.
+
+Note that, unlike usual PowerShell output, objects are not formatted in output; that is, they are converted into strings by the ToString() method and no newlines or spaces are inserted between them. See Example section for details.
 
 ## Examples
 
 ### Basic example
 
-Consider a document template is prepared in `template.txt`.
+Consider a document template is prepared in `template.txt`, as follows.
 
 ```PowerShell
 PS>Get-Content template.txt
@@ -92,7 +94,7 @@ First, a simple `dir` call in a template yields the following result:
 
 ```PowerShell
 PS>Invoke-TemplateEngine '<% dir %>'
-a.textb.txtc.txt
+a.txtb.txtc.txt
 ```
 
 This is because each FileInfo object is converted into a string by the ToString() method (which produces `a.txt` and so on), and no formatting is done including insertion of newlines or spaces.
@@ -137,6 +139,8 @@ Mode          LastWriteTime Length Name
 
 ## Dependencies
 
+On runtime, there is no dependency on external modules.
+
 On build time, it depends the following modules:
 
 ```PowerShell
@@ -144,8 +148,6 @@ Install-Module pester -Scope CurrentUser
 Install-Module InvokeBuild -Scope CurrentUser
 Install-Module XmlDoc2CmdletDoc -Destination lib
 ```
-
-On runtime there is no dependency.
 
 ## License
 
