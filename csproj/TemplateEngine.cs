@@ -113,7 +113,11 @@ namespace Horker.TemplateEngine
                 Char ch;
                 for (;;) {
                     ch = GetNextChar();
-                    if (ch == '<') {
+                    if (ch == '\'') {
+                        Append('\'');
+                        Append('\'');
+                    }
+                    else if (ch == '<') {
                         ch = GetNextChar();
                         if (ch == '%') {
                             CloseLiteral();

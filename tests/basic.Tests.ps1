@@ -100,6 +100,11 @@ Describe "script generator" {
     $result = Invoke-Generator -Join "<% f %>"
     $result | Should -Be "1234abc"
   }
+
+  It "can treat single and double quotes correctly" {
+    $result = Invoke-Generator -Join "' '' ''' `" `"`""
+    $result | Should -Be "' '' ''' `" `"`""
+  }
 }
 
 Describe "Invoke-TemplateEngine" {
