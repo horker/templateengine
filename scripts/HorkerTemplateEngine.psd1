@@ -12,7 +12,7 @@
 RootModule = 'HorkerTemplateEngine.dll'
 
 # Version number of this module.
-ModuleVersion = '0.1.1'
+ModuleVersion = '0.1.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -114,6 +114,9 @@ v0.1.0
 First release
 
 v0.1.1
+Several bug fixes
+
+v0.1.2
 Several bug fixes
 "@
 
